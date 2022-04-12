@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <div class = "tela">
+        <h1>Login</h1>
+        <form action="/login-process" method="post">
+            <input name="email" class = "inf" type="text" placeholder="Email">
+            <br><br>
+            <input name ="senha" class = "inf" type="password" placeholder="Senha">
+            <br><br>
+            <button class = "main-btt">Log in</button>
+        </form>
+        <form action="/criarconta" method="post">
+            <button class = "criar">Criar conta</button>
+        </form>
+        <h2 class = "erro">{{ error }}</h2>
+    </div>
+{% endblock %}

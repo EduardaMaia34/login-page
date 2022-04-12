@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block body %} 
+    <div class="tela">
+        <h1>Crie sua conta</h1>
+        <form action="/criarconta-process" method="post">
+            <input class = "inf" type="text" placeholder="Nome" name="nome">
+            <br><br>
+            <input class = "inf" type="text" placeholder="Email" name="email">
+            <br><br>
+            <input class = "inf" type="password" placeholder="Senha" name="senha">
+            <br><br>
+            <button class="main-btt">Criar Conta</button>
+            <h2 class = "erro">{{ error }}</h2>
+        </form>
+    </div>
+    
+{% endblock %}
