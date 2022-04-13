@@ -9,13 +9,11 @@ app = Flask("__name__")
 
 app.secret_key = "app.secret_key.project=loginwithflask"
 
-nome = None
-email = None
-senha = None
 
 @app.route("/", methods=["GET","POST"])
 def index():
     return redirect(url_for("login_page"))
+
 
 
 @app.route("/criarconta", methods=["POST", "GET"])
@@ -24,7 +22,6 @@ def criar_page():
 
 
 @app.route("/criarconta-process", methods = ["POST", "GET"])
-
 def criar_conta():
 
     nome = request.form.get("nome")
@@ -41,6 +38,8 @@ def criar_conta():
 
     else:
        return render_template ("criarconta.html", error="Já existe uma conta com esse email")
+
+
 
 @app.route("/login", methods=["POST", "GET"])
 def login_page():
@@ -61,11 +60,12 @@ def login():
         if request.method == "POST": #Se já não está login
             user = request.form['email']
             session["user"] = user
-            return redirect(url_for("conta"))
+            return redirect(url_for("homepage"))
 
 
-@app.route("/conta", methods=["POST", "GET"])
-def conta():
+
+@app.route("/homepage", methods=["POST", "GET"])
+def homepage():
     if "user" in session:
         user = session["user"]
 
@@ -76,10 +76,15 @@ def conta():
     else:
         return redirect(url_for("login_page"))
 
+
+
 @app.route("/logout", methods=['GET', 'POST'])
 def logout():
     session.pop("user", None)
     return redirect(url_for("login_page"))
 
+
+#Caso esteja sendo rodado diretamente por ele, executa oque tem dentro
+#Se tiver sido importado, não vai importar
 if __name__ == "__main__":
     app.run(debug=True)
